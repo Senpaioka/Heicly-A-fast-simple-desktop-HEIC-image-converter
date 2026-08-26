@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 from PyInstaller.utils.hooks import collect_all
 
-datas = [('app/assets', 'app/assets')]
+datas = [('C:/Users/Abdul/OneDrive/Desktop/Projects/heic-converter/app/assets', 'app/assets')]
 binaries = []
 hiddenimports = ['pillow_heif']
 tmp_ret = collect_all('pillow_heif')
@@ -9,7 +9,7 @@ datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 
 
 a = Analysis(
-    ['app/main.py'],
+    ['C:/Users/Abdul/OneDrive/Desktop/Projects/heic-converter/app/main.py'],
     pathex=[],
     binaries=binaries,
     datas=datas,
@@ -42,5 +42,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='app/assets/icon.ico',
+    icon=['C:/Users/Abdul/OneDrive/Desktop/Projects/heic-converter/app/assets/icon.ico'],
 )

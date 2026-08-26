@@ -10,6 +10,9 @@ def build_executable() -> None:
     project_root = Path(__file__).parent.resolve()
     main_script = project_root / "app" / "main.py"
 
+    icon_path = project_root / "app" / "assets" / "icon.ico"
+    assets_dir = project_root / "app" / "assets"
+
     cmd = [
         sys.executable,
         "-m",
@@ -18,6 +21,8 @@ def build_executable() -> None:
         "--onefile",
         "--name=Heicly",
         "--clean",
+        f"--icon={icon_path}",
+        f"--add-data={assets_dir};app/assets",
         "--hidden-import=pillow_heif",
         "--collect-all=pillow_heif",
         str(main_script),

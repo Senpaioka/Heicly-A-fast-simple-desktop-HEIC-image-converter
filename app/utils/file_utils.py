@@ -3,8 +3,26 @@
 import hashlib
 import os
 import shutil
+import sys
 from pathlib import Path
 from typing import List, Tuple
+
+
+def get_asset_path(filename: str) -> Path:
+    """Get absolute path to an asset file, working for dev mode and PyInstaller bundle."""
+    if hasattr(sys, "_MEIPASS"):
+        meipass_path = Path(getattr(sys, "_MEIPASS"))
+        bundled_asset = meipass_path / "app" / "assets" / filename
+        if bundled_asset.exists():
+            return bundled_asset
+        alt_bundled_asset = meipass_path / "assets" / filename
+        if alt_bundled_asset.exists():
+            return alt_bundled_asset
+        return bundled_asset
+    
+    dev_asset = Path(__file__).resolve().parent.parent / "assets" / filename
+    return dev_asset
+
 
 HEIC_EXTENSIONS: Tuple[str, ...] = (".heic", ".heif", ".hif")
 HEIC_MAGIC_BRANDS: List[bytes] = [

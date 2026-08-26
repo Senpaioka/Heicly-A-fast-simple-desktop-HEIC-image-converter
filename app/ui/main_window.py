@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import List, Optional
 
 from PySide6.QtCore import QUrl, Qt
-from PySide6.QtGui import QDesktopServices
+from PySide6.QtGui import QDesktopServices, QIcon, QPixmap
 from PySide6.QtWidgets import (
     QApplication,
     QFrame,
@@ -27,6 +27,7 @@ from app.ui.file_list import FileListView
 from app.ui.options_panel import OptionsPanel
 from app.ui.progress_panel import ProgressPanel
 from app.ui.styles import DARK_THEME, LIGHT_THEME
+from app.utils.file_utils import get_asset_path
 from app.utils.logger import get_logger
 from app.workers.conversion_worker import ConversionWorker
 
@@ -42,11 +43,18 @@ class MainWindow(QMainWindow):
         self.resize(1280, 800)
         self.setMinimumSize(900, 600)
 
+        icon_path = get_asset_path("icon.ico")
+        if not icon_path.exists():
+            icon_path = get_asset_path("icon.png")
+        if icon_path.exists():
+            self.setWindowIcon(QIcon(str(icon_path)))
+
         self.settings_mgr = SettingsManager()
         self.worker: Optional[ConversionWorker] = None
 
         self._init_ui()
         self._apply_saved_theme()
+
 
     def _init_ui(self) -> None:
         central_widget = QWidget(self)
@@ -61,15 +69,25 @@ class MainWindow(QMainWindow):
         header_frame.setObjectName("card")
         header_layout = QHBoxLayout(header_frame)
         header_layout.setContentsMargins(12, 8, 12, 8)
+        header_layout.setSpacing(12)
 
-        app_title = QLabel("🖼️ Heicly", self)
+        logo_png = get_asset_path("icon.png")
+        if logo_png.exists():
+            logo_label = QLabel(self)
+            pixmap = QPixmap(str(logo_png)).scaled(
+                36, 36, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
+            )
+            logo_label.setPixmap(pixmap)
+            header_layout.addWidget(logo_label)
+
+        app_title = QLabel("Heicly", self)
         app_title.setObjectName("titleLabel")
 
         app_desc = QLabel("Fast, offline HEIC/HEIF image conversion tool", self)
         app_desc.setObjectName("subtitleLabel")
 
-
         header_info = QVBoxLayout()
+        header_info.setSpacing(2)
         header_info.addWidget(app_title)
         header_info.addWidget(app_desc)
 
@@ -218,12 +236,20 @@ class MainWindow(QMainWindow):
         self.status_bar.showMessage(f"Switched theme to {new_theme.title()} mode.")
 
     def _show_about(self) -> None:
-        QMessageBox.about(
-            self,
-            "About Heicly",
-            "<h3>Heicly v0.1.0</h3>"
+        msg_box = QMessageBox(self)
+        msg_box.setWindowTitle("About Heicly")
+        msg_box.setText("<h3>Heicly v0.1.0</h3>")
+        msg_box.setInformativeText(
             "<p>A fast, offline desktop utility for Windows to convert HEIC/HEIF images "
             "to JPG, PNG, JPEG, or WEBP.</p>"
             "<p><b>Features:</b> Batch processing, drag & drop, EXIF preservation, "
-            "smart auto-naming, quality options, image resizing, and dark/light mode.</p>",
+            "smart auto-naming, quality options, image resizing, and dark/light mode.</p>"
         )
+        logo_png = get_asset_path("icon.png")
+        if logo_png.exists():
+            pix = QPixmap(str(logo_png)).scaled(
+                64, 64, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
+            )
+            msg_box.setIconPixmap(pix)
+            msg_box.setWindowIcon(QIcon(str(logo_png)))
+        msg_box.exec()
