@@ -10,7 +10,7 @@ def build_executable() -> None:
     project_root = Path(__file__).parent.resolve()
     main_script = project_root / "app" / "main.py"
 
-    icon_path = project_root / "app" / "assets" / "icon.ico"
+    icon_path = project_root / "app" / "assets" / "icon.png"
     assets_dir = project_root / "app" / "assets"
 
     cmd = [

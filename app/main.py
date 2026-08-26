@@ -24,9 +24,9 @@ def main() -> int:
     app.setApplicationName("Heicly")
     app.setOrganizationName("Heicly")
 
-    icon_path = get_asset_path("icon.ico")
+    icon_path = get_asset_path("icon.png")
     if not icon_path.exists():
-        icon_path = get_asset_path("icon.png")
+        icon_path = get_asset_path("icon.ico")
 
     if icon_path.exists():
         app.setWindowIcon(QIcon(str(icon_path)))

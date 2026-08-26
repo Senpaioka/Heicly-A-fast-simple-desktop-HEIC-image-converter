@@ -42,5 +42,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['C:/Users/Abdul/OneDrive/Desktop/Projects/heic-converter/app/assets/icon.ico'],
+    icon=['C:/Users/Abdul/OneDrive/Desktop/Projects/heic-converter/app/assets/icon.png'],
 )
