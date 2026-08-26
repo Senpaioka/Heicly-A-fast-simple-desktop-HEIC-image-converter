@@ -17,17 +17,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Prepare Windows Workspace Directory
-        shell: powershell
+      - name: Clone Repository
+        shell: bash
         run: |
-          $ws = $env:GITHUB_WORKSPACE
-          Write-Host "Ensuring workspace folder exists at: $ws"
-          if (-not (Test-Path -LiteralPath "\\?\$ws")) {
-            New-Item -ItemType Directory -Force -Path "\\?\$ws"
-          }
-
-      - name: Checkout Code
-        uses: actions/checkout@v4
+          mkdir -p /c/build_ws
+          git clone --depth 1 "https://github.com/${{ github.repository }}.git" /c/build_ws
 
       - name: Set up uv & Python
         uses: astral-sh/setup-uv@v5
@@ -36,15 +30,19 @@ jobs:
           enable-cache: true
 
       - name: Install Dependencies
+        working-directory: C:/build_ws
         run: uv sync
 
       - name: Run Pytest Suite
+        working-directory: C:/build_ws
         run: uv run pytest
 
       - name: Build Executable with PyInstaller
+        working-directory: C:/build_ws
         run: uv run python build_installer.py
 
       - name: Package Executable into ZIP
+        working-directory: C:/build_ws
         shell: powershell
         run: |
           Compress-Archive -Path "dist/Heicly.exe" -DestinationPath "dist/Heicly-Windows-x64.zip" -Force
@@ -54,8 +52,8 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
         with:
           files: |
-            dist/Heicly.exe
-            dist/Heicly-Windows-x64.zip
+            C:/build_ws/dist/Heicly.exe
+            C:/build_ws/dist/Heicly-Windows-x64.zip
           name: Heicly Release ${{ github.ref_name }}
           generate_release_notes: true
           draft: false
