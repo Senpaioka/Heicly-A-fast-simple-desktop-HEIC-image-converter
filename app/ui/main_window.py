@@ -39,7 +39,7 @@ class MainWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("HEIC Converter for Windows")
-        self.resize(1100, 720)
+        self.resize(1280, 800)
         self.setMinimumSize(900, 600)
 
         self.settings_mgr = SettingsManager()
