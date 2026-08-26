@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p /c/build_ws
-          git clone --depth 1 "https://github.com/${{ github.repository }}.git" /c/build_ws
+          git clone --depth 1 --branch ${{ github.ref_name }} "https://github.com/${{ github.repository }}.git" /c/build_ws
 
       - name: Set up uv & Python
         uses: astral-sh/setup-uv@v5
