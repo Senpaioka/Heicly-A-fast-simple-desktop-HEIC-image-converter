@@ -38,7 +38,7 @@ class MainWindow(QMainWindow):
 
     def __init__(self) -> None:
         super().__init__()
-        self.setWindowTitle("HEIC Converter for Windows")
+        self.setWindowTitle("Heicly - HEIC Converter for Windows")
         self.resize(1280, 800)
         self.setMinimumSize(900, 600)
 
@@ -62,11 +62,12 @@ class MainWindow(QMainWindow):
         header_layout = QHBoxLayout(header_frame)
         header_layout.setContentsMargins(12, 8, 12, 8)
 
-        app_title = QLabel("🖼️ HEIC Converter", self)
+        app_title = QLabel("🖼️ Heicly", self)
         app_title.setObjectName("titleLabel")
 
         app_desc = QLabel("Fast, offline HEIC/HEIF image conversion tool", self)
         app_desc.setObjectName("subtitleLabel")
+
 
         header_info = QVBoxLayout()
         header_info.addWidget(app_title)
@@ -219,8 +220,8 @@ class MainWindow(QMainWindow):
     def _show_about(self) -> None:
         QMessageBox.about(
             self,
-            "About HEIC Converter",
-            "<h3>HEIC Converter v0.1.0</h3>"
+            "About Heicly",
+            "<h3>Heicly v0.1.0</h3>"
             "<p>A fast, offline desktop utility for Windows to convert HEIC/HEIF images "
             "to JPG, PNG, JPEG, or WEBP.</p>"
             "<p><b>Features:</b> Batch processing, drag & drop, EXIF preservation, "

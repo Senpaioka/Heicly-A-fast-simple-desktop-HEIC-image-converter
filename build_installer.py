@@ -1,4 +1,4 @@
-"""PyInstaller build script to bundle HEIC Converter into a single Windows EXE."""
+"""PyInstaller build script to bundle Heicly into a single Windows EXE."""
 
 import subprocess
 import sys
@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def build_executable() -> None:
-    """Invoke PyInstaller to build HEICConverter.exe."""
+    """Invoke PyInstaller to build Heicly.exe."""
     project_root = Path(__file__).parent.resolve()
     main_script = project_root / "app" / "main.py"
 
@@ -16,7 +16,7 @@ def build_executable() -> None:
         "PyInstaller",
         "--noconsole",
         "--onefile",
-        "--name=HEICConverter",
+        "--name=Heicly",
         "--clean",
         "--hidden-import=pillow_heif",
         "--collect-all=pillow_heif",
@@ -28,7 +28,7 @@ def build_executable() -> None:
 
     result = subprocess.run(cmd, cwd=str(project_root))
     if result.returncode == 0:
-        exe_path = project_root / "dist" / "HEICConverter.exe"
+        exe_path = project_root / "dist" / "Heicly.exe"
         print("\n==========================================")
         print("BUILD SUCCESSFUL!")
         print(f"Executable generated at: {exe_path}")

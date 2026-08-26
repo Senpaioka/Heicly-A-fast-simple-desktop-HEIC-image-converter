@@ -1,4 +1,4 @@
-"""Application entry point for HEIC Converter."""
+"""Application entry point for Heicly."""
 
 import sys
 
@@ -9,15 +9,16 @@ from app.ui.main_window import MainWindow
 
 
 def main() -> int:
-    """Launch HEIC Converter desktop application GUI."""
+    """Launch Heicly desktop application GUI."""
     app = QApplication(sys.argv)
-    app.setApplicationName("HEIC Converter")
-    app.setOrganizationName("HEICConverter")
+    app.setApplicationName("Heicly")
+    app.setOrganizationName("Heicly")
 
     window = MainWindow()
     window.show()
 
     return app.exec()
+
 
 
 if __name__ == "__main__":

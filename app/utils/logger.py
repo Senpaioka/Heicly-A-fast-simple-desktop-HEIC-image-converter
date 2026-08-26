@@ -1,4 +1,4 @@
-"""Logging configuration for HEIC Converter application."""
+"""Logging configuration for Heicly application."""
 
 import logging
 import sys
@@ -13,7 +13,7 @@ def get_logger() -> logging.Logger:
     if _logger is not None:
         return _logger
 
-    logger = logging.getLogger("heic_converter")
+    logger = logging.getLogger("heicly")
     logger.setLevel(logging.INFO)
 
     if not logger.handlers:

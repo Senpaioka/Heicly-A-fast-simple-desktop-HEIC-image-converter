@@ -89,7 +89,7 @@ wheels = [
 ]
 
 [[package]]
-name = "heic-converter"
+name = "heicly"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
