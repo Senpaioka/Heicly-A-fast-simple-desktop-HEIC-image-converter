@@ -6,6 +6,16 @@ Built with **Python 3.10+**, **PySide6 (Qt for Python)**, and **pillow-heif**, H
 
 ---
 
+## 🚀 Download Executable for Windows
+
+No installation required! Download the standalone `.exe` or `.zip` directly and run it:
+
+- [📥 **Download Heicly.exe (Direct Download)**](https://github.com/Senpaioka/Heicly-A-fast-simple-desktop-HEIC-image-converter/releases/latest/download/Heicly.exe)
+- [📦 **Download Heicly-Windows-x64.zip (ZIP Archive)**](https://github.com/Senpaioka/Heicly-A-fast-simple-desktop-HEIC-image-converter/releases/latest/download/Heicly-Windows-x64.zip)
+- 🏷️ [View All GitHub Releases](https://github.com/Senpaioka/Heicly-A-fast-simple-desktop-HEIC-image-converter/releases)
+
+---
+
 ## Key Features
 
 - **Batch Conversion**: Process single image files, multiple selected files, or entire folders simultaneously.
