@@ -17,6 +17,15 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Prepare Windows Workspace Directory
+        shell: powershell
+        run: |
+          $ws = $env:GITHUB_WORKSPACE
+          Write-Host "Ensuring workspace folder exists at: $ws"
+          if (-not (Test-Path -LiteralPath "\\?\$ws")) {
+            New-Item -ItemType Directory -Force -Path "\\?\$ws"
+          }
+
       - name: Checkout Code
         uses: actions/checkout@v4
 
