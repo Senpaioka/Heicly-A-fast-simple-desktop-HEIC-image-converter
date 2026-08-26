@@ -1,0 +1,28 @@
+[project]
+name = "heic-converter"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "senpaioka@windows", email = "abdulmannan7589@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "pillow>=12.3.0",
+    "pillow-heif>=1.5.0",
+    "pyside6>=6.11.2",
+]
+
+[project.scripts]
+heic-converter = "app.main:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "pyinstaller>=6.22.2",
+    "pytest>=9.1.1",
+]
